@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>img/avatar.png</file>
+        <file>img/play.png</file>
+        <file>ArtistItem.qml</file>
+        <file>AlbumItem.qml</file>
+        <file>img/album.jpg</file>
+        <file>img/clock.png</file>
+        <file>img/music.png</file>
+        <file>img/playlist.png</file>
+        <file>img/setting.png</file>
+        <file>img/find.png</file>
+        <file>img/shuffle.png</file>
+        <file>img/menu.png</file>
+        <file>CircleButton.qml</file>
+        <file>img/pause.png</file>
+        <file>img/replay.png</file>
+        <file>img/skip-next.png</file>
+        <file>img/skip-prev.png</file>
+        <file>img/volumn.png</file>
+        <file>img/shuffle_white.png</file>
+        <file>ControlBar.qml</file>
+        <file>IconButton.qml</file>
+        <file>InteractiveArea.qml</file>
+        <file>SearchInput.qml</file>
+        <file>img/plus.png</file>
+        <file>SongItem.qml</file>
+    </qresource>
+</RCC>
