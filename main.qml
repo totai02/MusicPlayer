@@ -4,6 +4,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
+import SongModel 1.0
+
 Window {
     visible: true
     width: 800
@@ -11,6 +13,7 @@ Window {
     title: qsTr("Music Player")
     minimumWidth: 960
     minimumHeight: 500
+
 
     ColumnLayout {
         id: columnLayout
@@ -311,6 +314,31 @@ Window {
                         currentIndex: tabBar.currentIndex
                         Layout.fillHeight: true
                         Layout.fillWidth: true
+
+                        states: [
+                            State {
+                                name: "focus"
+                                PropertyChanges {
+                                    target: stackLayout
+                                    opacity: 1.0
+                                }
+                            },
+                            State {
+                                name: "unfocus"
+                                PropertyChanges {
+                                    target: stackLayout
+                                    opacity: 0
+                                }
+                            }
+                        ]
+
+                        transitions: Transition {
+                            NumberAnimation{
+                                properties: "opacity"
+                                duration: 300
+                            }
+                        }
+
                         Row {
                             id: row3
                             width: 200
@@ -325,36 +353,30 @@ Window {
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
 
-                                model: ListModel {
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
+                                ScrollBar.vertical: ScrollBar {
+                                    parent: listView.parent
+                                    anchors.top: listView.top
+                                    anchors.left: listView.right
+                                    anchors.bottom: listView.bottom
                                 }
+
+                                model: SongModel{}
                                 delegate: SongItem{
+
+                                    title: model.title
+                                    artist: model.artist
+                                    album: model.album
+                                    genre: model.genre
+                                    length: Math.round(model.length / 60) + ":" + (model.length % 60 < 10 ? ("0" + model.length % 60) : model.length % 60)
+
                                     width: parent.width
                                     bgColor: (index % 2 == 0) ? "white" : "#eeeeee"
                                     hoverColor: "#4c808080"
+
+                                    onClicked: {
+                                        stackLayout.state = "unfocus"
+                                        musicControl.state = "focus"
+                                    }
                                 }
 
                             }
@@ -380,23 +402,7 @@ Window {
                                 }
                                 cellHeight: 200
                                 cellWidth: 200
-                                model: ListModel {
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                }
+                                model: 20
                             }
                         }
 
@@ -411,23 +417,7 @@ Window {
                                 anchors.leftMargin: 20
                                 clip: true
                                 anchors.fill: parent
-                                model: ListModel {
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                    ListElement {}
-                                }
+                                model: 20
                                 cellWidth: 200
                                 cellHeight: 200
                                 delegate: AlbumItem{
@@ -451,6 +441,38 @@ Window {
             ControlBar {
                 id: musicControl
                 Layout.fillWidth: true
+
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        stackLayout.state = "focus"
+                        musicControl.state = "unfocus"
+                    }
+                }
+
+                states: [
+                    State {
+                        name: "focus"
+                        PropertyChanges {
+                            target: musicControl
+                            opacity: 1.0
+                        }
+                    },
+                    State {
+                        name: "unfocus"
+                        PropertyChanges {
+                            target: musicControl
+                            opacity: 0
+                        }
+                    }
+                ]
+
+                transitions: Transition {
+                    NumberAnimation{
+                        properties: "opacity"
+                        duration: 300
+                    }
+                }
             }
 
         }

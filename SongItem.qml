@@ -3,6 +3,14 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 
 InteractiveArea {
+
+    property alias title: text1.text
+    property alias artist: text2.text
+    property alias album: albumName.text
+    property alias genre: genre.text
+    property alias length: text3.text
+
+
     width: 800
     height: 50
 
