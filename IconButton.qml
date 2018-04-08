@@ -9,35 +9,50 @@ InteractiveArea {
     property bool toggle: false
     property bool checked: false
 
-    signal send3(string msg)
-
     width: 200
     height: 50
 
+    states: [
+        State {
+            name: "mousePress"
+            when: pressed
+            PropertyChanges {
+                target: content
+                scale: 0.8
+            }
+        },
+        State {
+            name: "mouseRelease"
+            when: released
+            PropertyChanges {
+                target: content
+                scale: 1.0
+            }
+        }
+    ]
+
     onPressed: {
-        onPress.start();
         if (toggle) checked = true;
     }
 
-    onReleased: {
-        onRelease.start();
-    }
-
-    NumberAnimation {
-        id: onPress
-        target: content
-        properties: "scale"
-        to: 0.8
-        duration: 50
-    }
-
-    NumberAnimation {
-        id: onRelease
-        target: content
-        properties: "scale"
-        to: 1.0
-        duration: 30
-    }
+    transitions: [
+        Transition {
+            to: "mousePress"
+            NumberAnimation{
+                to: 0.8
+                properties: "scale"
+                duration: 50
+            }
+        },
+        Transition {
+            to: "mouseRelease"
+            NumberAnimation{
+                to: 1.0
+                properties: "scale"
+                duration: 30
+            }
+        }
+    ]
 
     RowLayout {
         id: content

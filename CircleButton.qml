@@ -3,8 +3,6 @@ import QtQuick 2.0
 InteractiveArea {
     property alias imageSource: image.source
     property alias bgColor: background.color
-    property var font
-    font: { pixelSize: 12; b: true }
 
     width: 70
     height: 70
@@ -13,39 +11,46 @@ InteractiveArea {
     radius: 35
     clip: false
 
+    states: [
+        State {
+            name: "mouseEnter"
+            PropertyChanges {
+                target: content
+                scale: 1.2
+            }
+        },
+        State {
+            name: "mouseExit"
+            PropertyChanges {
+                target: content
+                scale: 1.0
+            }
+        }
+    ]
+
     onEntered: {
-        onEnter.start();
+        state = "mouseEnter"
     }
 
     onExited: {
-       onExit.start()
+       state = "mouseExit"
     }
 
     onPressed: {
-        onExit.start()
+        state = "mouseExit"
     }
 
     onReleased: {
-        onEnter.start();
+        state = "mouseEnter"
     }
 
-    NumberAnimation {
-        id: onEnter
-        target: content
-        properties: "scale"
-        to: 1.2
-        duration: 50
+    transitions: Transition {
+        NumberAnimation {
+            properties: "scale"
+            duration: 50
+        }
     }
 
-
-
-    NumberAnimation {
-        id: onExit
-        target: content
-        properties: "scale"
-        to: 1.0
-        duration: 50
-    }
 
     Item {
         id: content
