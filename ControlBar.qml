@@ -8,9 +8,42 @@ Item {
     width: 1024
     Rectangle {
         id: rectangle
-        color: "#2374ae"
+        color: "#1473a2"
         radius: 0
         anchors.fill: parent
+    }
+
+    Connections {
+        target: musicPlayer
+
+        function updateView(isPlay){
+
+            label.text = musicPlayer.getMusicTitle()
+            label1.text = musicPlayer.getMusicArtist()
+            label2.text = musicPlayer.getMusicDuration()
+            label3.text = musicPlayer.getMusicLength()
+
+            if (isPlay) {
+                customButton2.imageSource = "img/pause.png"
+                progressBar.enabled = true;
+            } else {
+                customButton2.imageSource = "img/play-circle.png"
+                progressBar.enabled = false;
+            }
+        }
+
+        onPlayPause:{
+            updateView(isPlay);
+        }
+
+        onUpdateInfoSuccess:{
+            updateView(false);
+        }
+
+        onUpdateDuration: {
+            label2.text = musicPlayer.getMusicDuration()
+            progressBar.value = musicPlayer.getProgress();
+        }
     }
 
     RowLayout {
@@ -18,72 +51,79 @@ Item {
         spacing: 10
         anchors.fill: parent
 
-        StackView {
-            id: stackView
-            width: 300
-            height: parent.height
+            Item {
+                id: stackView
+                height: parent.height
+                Layout.fillWidth: true
 
-            Row {
-                id: row
-                width: 250
-                spacing: 5
-                clip: true
-                anchors.fill: parent
+                InteractiveArea {
+                    hoverColor: "#144f78"
+                    anchors.fill: parent
 
-                StackView {
-                    id: stackView3
-                    width: 100
-                    height: 100
+                    Row {
+                        id: row
+                        width: 250
+                        spacing: 5
+                        clip: true
+                        anchors.fill: parent
 
-                    Image {
-                        id: image
-                        width: 100
-                        height: 100
-                        source: "img/avatar.png"
+                        Item {
+                            id: stackView3
+                            width: 100
+                            height: 100
+
+                            Image {
+                                id: image
+                                width: 100
+                                height: 100
+                                source: "img/music_icon.png"
+                            }
+                        }
+
+                        Item {
+                            id: container
+                            height: 100
+                            anchors.left: parent.left
+                            anchors.leftMargin: 110
+                            anchors.right: parent.right
+                            anchors.rightMargin: 0
+                            clip: true
+
+                            Label {
+                                id: label
+                                color: "#ffffff"
+                                text: musicPlayer.getMusicTitle()
+                                font.family: "Adobe Kaiti Std R"
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
+                                anchors.right: parent.right
+                                anchors.rightMargin: 10
+                                font.pointSize: 14
+                                anchors.top: parent.top
+                                anchors.topMargin: 20
+                            }
+
+                            Label {
+                                id: label1
+                                height: 19
+                                color: "#ffffff"
+                                text: musicPlayer.getMusicArtist()
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
+                                anchors.right: parent.right
+                                anchors.rightMargin: 10
+                                elide: Text.ElideRight
+                                font.bold: true
+                                font.pointSize: 12
+                                anchors.bottom: parent.bottom
+                                anchors.bottomMargin: 27
+                            }
+                        }
                     }
                 }
-
-                ScrollView {
-                    id: scrollView
-                    height: 100
-                    anchors.left: parent.left
-                    anchors.leftMargin: 110
-                    anchors.right: parent.right
-                    anchors.rightMargin: 0
-                    font.capitalization: Font.MixedCase
-                    contentHeight: 100
-                    contentWidth: 100
-                    font.pointSize: 6
-                    clip: true
-
-                    Label {
-                        id: label
-                        color: "#ffffff"
-                        text: qsTr("Timber")
-                        font.pointSize: 12
-                        anchors.top: parent.top
-                        anchors.topMargin: 30
-                    }
-
-                    Label {
-                        id: label1
-                        width: 190
-                        height: 19
-                        color: "#ffffff"
-                        text: qsTr("Pitbull, Ke - Global Warming Meltdown")
-                        elide: Text.ElideRight
-                        font.bold: true
-                        font.pointSize: 12
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 30
-                    }
-                }
-            }
-        }
-
-        StackView {
+             }
+        Item {
             id: stackView1
-            width: 200
             height: parent.height
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -113,8 +153,13 @@ Item {
                             id: customButton
                             width: 40
                             height: 40
+                            toggle: true
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                             imageSource: "img/shuffle_white.png"
+
+                            onClicked: {
+                                musicPlayer.setShuffle(checked);
+                            }
                         }
 
                         CircleButton {
@@ -123,14 +168,31 @@ Item {
                             height: 40
                             imageSource: "img/skip-prev.png"
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+                            onClicked: {
+                                musicPlayer.prevMedia();
+                            }
                         }
 
                         CircleButton {
+
                             id: customButton2
                             width: 48
                             height: 48
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                            imageSource: "img/pause.png"
+                            imageSource: "img/play-circle.png"
+
+                            onClicked: {
+                                if (musicPlayer.isPlaying()) {
+                                    imageSource = "img/pause.png";
+                                    musicPlayer.pause();
+                                }
+                                else {
+                                    imageSource = "img/play-circle.png"
+                                    musicPlayer.cont();
+                                }
+                            }
+
                         }
 
                         CircleButton {
@@ -139,14 +201,23 @@ Item {
                             height: 40
                             imageSource: "img/skip-next.png"
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+                            onClicked: {
+                                musicPlayer.nextMedia();
+                            }
                         }
 
                         CircleButton {
                             id: customButton4
                             width: 40
                             height: 40
+                            toggle: true
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                             imageSource: "img/replay.png"
+
+                            onClicked: {
+                                musicPlayer.setLoop(checked);
+                            }
                         }
                     }
                 }
@@ -161,27 +232,30 @@ Item {
 
                     RowLayout {
                         id: rowLayout1
-                        anchors.rightMargin: 60
-                        anchors.leftMargin: 60
                         anchors.fill: parent
 
                         Label {
                             id: label2
                             color: "#ffffff"
-                            text: qsTr("3:02")
+                            text: "00:00"
                             font.pointSize: 10
                         }
 
-                        ProgressBar {
+                        Slider {
                             id: progressBar
+                            enabled: false
                             Layout.fillWidth: true
-                            value: 0.75
+                            value: 0
+
+                            onMoved: {
+                                musicPlayer.setMediaPosition(value)
+                            }
                         }
 
                         Label {
                             id: label3
                             color: "#ffffff"
-                            text: qsTr("4:01")
+                            text: "00:00"
                             font.pointSize: 10
                         }
 
@@ -191,10 +265,10 @@ Item {
 
         }
 
-        StackView {
+        Item {
             id: stackView2
-            width: 250
             height: parent.height
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
             Column {
@@ -203,25 +277,46 @@ Item {
                 anchors.fill: parent
 
                 CircleButton {
+                    property var currentVolumn: musicPlayer.getVolumn()
+
                     id: customButton5
                     width: 40
                     height: 40
-                    anchors.left: parent.left
-                    anchors.leftMargin: 0
                     anchors.top: parent.top
                     anchors.topMargin: 16
+                    anchors.right: parent.right
+                    anchors.rightMargin: 190
                     imageSource: "img/volumn.png"
+
+                    onClicked: {
+                        if (musicPlayer.getVolumn() !== 0) {
+                            currentVolumn = musicPlayer.getVolumn();
+                            musicPlayer.setVolumn(0);
+                            imageSource = "img/volumn-mute.png"
+                            slider1.value = 0;
+                        } else {
+                            musicPlayer.setVolumn(currentVolumn);
+                            imageSource = "img/volumn.png"
+                            slider1.value = currentVolumn;
+                        }
+                    }
                 }
 
                 Slider {
                     id: slider1
                     height: 10
-                    scale: 0.7
-                    anchors.left: parent.left
-                    anchors.leftMargin: 15
+                    stepSize: 10
+                    to: 100
                     anchors.top: parent.top
                     anchors.topMargin: 30
-                    value: 0.5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    scale: 0.7
+                    value: musicPlayer.getVolumn()
+
+                    onValueChanged: {
+                        musicPlayer.setVolumn(value);
+                    }
                 }
 
             }

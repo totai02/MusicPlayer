@@ -3,13 +3,14 @@ import QtQuick 2.0
 InteractiveArea {
     property alias imageSource: image.source
     property alias bgColor: background.color
+    property bool toggle: false
+    property bool checked: false
 
     width: 70
     height: 70
+    radius: width/2
 
     hoverColor: "#80144f78"
-    radius: 35
-    clip: false
 
     states: [
         State {
@@ -42,6 +43,11 @@ InteractiveArea {
 
     onReleased: {
         state = "mouseEnter"
+        if (toggle){
+            checked = !checked;
+            if (checked) bgColor = "#80144978";
+            else bgColor = "#00ffffff"
+        }
     }
 
     transitions: Transition {

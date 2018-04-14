@@ -30,7 +30,7 @@ InteractiveArea {
 
     Image {
         id: img
-        source: 'img/album.jpg'
+        source: 'img/album.png'
         width: 150
         height: 150
     }
@@ -73,7 +73,7 @@ InteractiveArea {
                 id: playBtn
                 width: 50
                 height: 50
-                bgColor: "#d5cfcf"
+                bgColor: "#1473a2"
                 anchors.left: parent.left
                 anchors.leftMargin: 20
                 anchors.top: parent.top
@@ -85,7 +85,7 @@ InteractiveArea {
                 id: addPlayList
                 width: 50
                 height: 50
-                bgColor: "#d5cfcf"
+                bgColor: "#1473a2"
                 anchors.right: parent.right
                 anchors.rightMargin: 20
                 anchors.top: parent.top
@@ -98,28 +98,31 @@ InteractiveArea {
     Text {
         id: albumLabel
         text: qsTr("Faded - Single")
+        font.weight: Font.Bold
+        font.family: "Adobe Heiti Std R"
         elide: Text.ElideRight
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 5
-        font.bold: true
+        font.bold: false
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 25
-        font.pixelSize: 16
+        font.pixelSize: 17
     }
 
     Text {
         id: artistNameLabel
         text: qsTr("Alan Walker")
+        font.family: "Adobe Kaiti Std R"
         elide: Text.ElideRight
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 9
-        font.pixelSize: 12
+        anchors.bottomMargin: 7
+        font.pixelSize: 14
     }
 
 }

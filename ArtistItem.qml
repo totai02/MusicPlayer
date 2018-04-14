@@ -40,7 +40,7 @@ InteractiveArea {
 
     Image {
         id: img
-        source: 'img/avatar.png'
+        source: 'img/artist.png'
         width: 150
         height: 150
         anchors.horizontalCenter: parent.horizontalCenter
@@ -89,7 +89,7 @@ InteractiveArea {
                 id: playBtn
                 width: 50
                 height: 50
-                bgColor: "#d5cfcf"
+                bgColor: "#868686"
                 anchors.left: parent.left
                 anchors.leftMargin: 45
                 anchors.top: parent.top
@@ -101,7 +101,7 @@ InteractiveArea {
                 id: addPlayList
                 width: 50
                 height: 50
-                bgColor: "#d5cfcf"
+                bgColor: "#868686"
                 anchors.right: parent.right
                 anchors.rightMargin: 45
                 anchors.top: parent.top
@@ -115,6 +115,8 @@ InteractiveArea {
     Text {
         id: text1
         text: qsTr("Various Aritists")
+        font.bold: false
+        font.family: "Adobe Heiti Std R"
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 15
         anchors.horizontalCenter: parent.horizontalCenter
