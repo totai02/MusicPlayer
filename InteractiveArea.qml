@@ -6,9 +6,10 @@ MouseArea {
     property alias hoverColor: hover.color
     property alias radius: hover.radius
 
+    cursorShape: Qt.PointingHandCursor
+
     width: 100
     height: 100
-    clip: true
     hoverEnabled: true
 
     onEntered: {
@@ -32,6 +33,7 @@ MouseArea {
         color: "#00ffffff"
         anchors.fill: parent
         radius: hover.radius
+        visible: true
         z: -1
     }
 

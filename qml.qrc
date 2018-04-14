@@ -1,11 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>img/avatar.png</file>
         <file>img/play.png</file>
         <file>ArtistItem.qml</file>
         <file>AlbumItem.qml</file>
-        <file>img/album.jpg</file>
         <file>img/clock.png</file>
         <file>img/music.png</file>
         <file>img/playlist.png</file>
@@ -25,6 +23,18 @@
         <file>InteractiveArea.qml</file>
         <file>SearchInput.qml</file>
         <file>img/plus.png</file>
-        <file>SongItem.qml</file>
+        <file>GroupButton.qml</file>
+        <file>MusicItem.qml</file>
+        <file>img/play-circle.png</file>
+        <file>img/volumn-mute.png</file>
+        <file>ToggleButton.qml</file>
+        <file>img/album.png</file>
+        <file>img/artist.png</file>
+        <file>img/music_icon.png</file>
+        <file>img/play_black.png</file>
+        <file>img/plus_black.png</file>
+        <file>FolderItem.qml</file>
+        <file>img/x_icon.png</file>
+        <file>img/icon.png</file>
     </qresource>
 </RCC>

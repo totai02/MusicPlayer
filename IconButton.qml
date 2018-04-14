@@ -32,14 +32,16 @@ InteractiveArea {
     ]
 
     onPressed: {
-        if (toggle) checked = true;
+        if (toggle) {
+            parent.change(this);
+            checked = true;
+        }
     }
 
     transitions: [
         Transition {
             to: "mousePress"
             NumberAnimation{
-                to: 0.8
                 properties: "scale"
                 duration: 50
             }
@@ -47,7 +49,6 @@ InteractiveArea {
         Transition {
             to: "mouseRelease"
             NumberAnimation{
-                to: 1.0
                 properties: "scale"
                 duration: 30
             }
@@ -100,10 +101,12 @@ InteractiveArea {
             Text {
                 id: label
                 text: qsTr("Button")
+                font.family: "Adobe Kaiti Std R"
+                font.bold: true
                 font.weight: Font.Thin
                 anchors.fill: parent
                 verticalAlignment: Text.AlignVCenter
-                font.pointSize: 11
+                font.pointSize: 12
             }
         }
     }
