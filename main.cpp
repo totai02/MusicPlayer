@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
     AlbumList albumList;
     MediaTool mediaTool;
 
+    application.setApplication(&app);
     application.setEngine(&engine);
     musicList.setMediaTool(&mediaTool);
     musicModel.setList(&musicList);

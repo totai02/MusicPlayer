@@ -79,7 +79,7 @@ InteractiveArea {
     Text {
         id: text1
         height: 30
-        text: qsTr("Text")
+        text: "Text"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle

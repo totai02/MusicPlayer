@@ -36,5 +36,8 @@
         <file>FolderItem.qml</file>
         <file>img/x_icon.png</file>
         <file>img/icon.png</file>
+        <file>language_en.qm</file>
+        <file>language_vn.qm</file>
+        <file>img/warning.png</file>
     </qresource>
 </RCC>

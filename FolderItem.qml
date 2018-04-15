@@ -4,7 +4,8 @@ InteractiveArea {
 
     property alias folderName: text1.text
     property alias folderUrl: text2.text
-    property var currentIndex;
+
+    signal removeClick(var index)
 
     width: 300
     height: 70
@@ -29,7 +30,7 @@ InteractiveArea {
         Text {
             id: text1
             y: 7
-            text: qsTr("Folder Name")
+            text: "Folder Name"
             elide: Text.ElideRight
             anchors.left: parent.left
             anchors.leftMargin: 0
@@ -43,7 +44,7 @@ InteractiveArea {
         Text {
             id: text2
             y: 35
-            text: qsTr("Folder URL")
+            text: "Folder URL"
             elide: Text.ElideRight
             anchors.right: parent.right
             anchors.rightMargin: 50
@@ -63,7 +64,7 @@ InteractiveArea {
             maximumize: false
 
             onClicked: {
-                folderList.removeRow(index)
+                removeClick(index)
             }
         }
     }

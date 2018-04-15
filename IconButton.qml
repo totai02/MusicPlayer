@@ -100,13 +100,13 @@ InteractiveArea {
 
             Text {
                 id: label
-                text: qsTr("Button")
-                font.family: "Adobe Kaiti Std R"
-                font.bold: true
+                text: "Button"
+                font.family: "Times New Roman"
+                font.bold: false
                 font.weight: Font.Thin
                 anchors.fill: parent
                 verticalAlignment: Text.AlignVCenter
-                font.pointSize: 12
+                font.pointSize: 15
             }
         }
     }

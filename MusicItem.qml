@@ -62,7 +62,6 @@ InteractiveArea {
             CheckBox {
                 id: checkBox
                 width: 40
-                text: qsTr("")
                 visible: false
                 scale: 0.8
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -83,7 +82,7 @@ InteractiveArea {
 
                 Text {
                     id: text1
-                    text: qsTr("See You Again")
+                    text: "See You Again"
                     font.bold: false
                     font.family: "Adobe Kaiti Std R"
                     Layout.fillHeight: true
@@ -137,7 +136,7 @@ InteractiveArea {
 
             Text {
                 id: text2
-                text: qsTr("Wiz Khalifa, Charlie Puth")
+                text: "Wiz Khalifa, Charlie Puth"
                 font.bold: false
                 font.family: "Adobe Fangsong Std R"
                 font.weight: Font.Normal
@@ -157,7 +156,7 @@ InteractiveArea {
             visible: if (content.width > 900) {true} else {false}
             Text {
                 id: albumName
-                text: qsTr("Furious 7 OST")
+                text: "Furious 7 OST"
                 font.bold: false
                 font.family: "Adobe Kaiti Std R"
                 anchors.fill: parent
@@ -179,7 +178,7 @@ InteractiveArea {
 
             Text {
                 id: genreName
-                text: qsTr("Contemporary Pop")
+                text: "Contemporary Pop"
                 font.bold: false
                 font.family: "Adobe Fangsong Std R"
                 font.weight: Font.Normal
@@ -200,7 +199,7 @@ InteractiveArea {
 
             Text {
                 id: text3
-                text: qsTr("3:49")
+                text: "3:49"
                 font.bold: false
                 font.family: "Adobe Fangsong Std R"
                 font.weight: Font.Normal

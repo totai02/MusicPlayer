@@ -117,7 +117,7 @@ InteractiveArea {
 
     Text {
         id: text1
-        text: qsTr("Various Aritists")
+        text: "Various Aritists"
         elide: Text.ElideNone
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         anchors.top: parent.top

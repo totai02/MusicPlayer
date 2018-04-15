@@ -62,3 +62,6 @@ HEADERS += \
     albumitem.h
 
 RC_ICONS = img/icon.ico
+
+TRANSLATIONS = language_en.ts \
+               language_vn.ts

@@ -101,7 +101,7 @@ InteractiveArea {
 
     Text {
         id: albumLabel
-        text: qsTr("Faded - Single")
+        text: "Faded - Single"
         font.weight: Font.Bold
         font.family: "Adobe Heiti Std R"
         elide: Text.ElideRight
@@ -117,7 +117,7 @@ InteractiveArea {
 
     Text {
         id: artistNameLabel
-        text: qsTr("Alan Walker")
+        text: "Alan Walker"
         font.family: "Adobe Kaiti Std R"
         elide: Text.ElideRight
         anchors.right: parent.right

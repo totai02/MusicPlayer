@@ -13,7 +13,7 @@ Window {
     y: (Screen.height - height) / 2
     width: 1024
     height: 700
-    title: qsTr("Music Player")
+    title: "Music Player"
     minimumWidth: 900
     minimumHeight: 700
 
@@ -28,7 +28,7 @@ Window {
 
     FileDialog {
         id: fileDialog
-        title: "Please choose a folder"
+        title: qsTr("Please choose a folder")
         folder: shortcuts.music
         selectFolder: true
 
@@ -119,7 +119,7 @@ Window {
                 height: 50
                 text: qsTr("Build your collection from your local music files")
                 font.bold: true
-                font.family: "Adobe Kaiti Std R"
+                font.family: "Times New Roman"
                 font.pixelSize: 20
             }
 
@@ -127,8 +127,8 @@ Window {
                 id: text12
                 height: 50
                 text: qsTr("Right now, we're watching these folders")
-                font.family: "Adobe Kaiti Std R"
-                font.pixelSize: 14
+                font.family: "Times New Roman"
+                font.pixelSize: 16
             }
 
             Button {
@@ -152,9 +152,12 @@ Window {
                 delegate: FolderItem{
                     folderName: name
                     folderUrl: url
-                    currentIndex: index
 
                     anchors.horizontalCenter: parent.horizontalCenter
+
+                    onRemoveClick: {
+                        folderList.removeRow(index)
+                    }
                 }
             }
         }
@@ -164,7 +167,7 @@ Window {
 
     Dialog {
         id: settingDialog
-        title: "Setting"
+        title: qsTr("Setting")
         width: 420
         height: 300
 
@@ -174,7 +177,7 @@ Window {
             y: 39
             text: qsTr("Music on this PC")
             font.bold: true
-            font.family: "Adobe Kaiti Std R"
+            font.family: "Times New Roman"
             font.pixelSize: 22
         }
 
@@ -207,7 +210,7 @@ Window {
             y: 113
             text: qsTr("Language")
             font.bold: true
-            font.family: "Adobe Kaiti Std R"
+            font.family: "Times New Roman"
             font.pixelSize: 20
         }
 
@@ -220,17 +223,52 @@ Window {
             anchors.leftMargin: 30
             anchors.right: parent.right
             anchors.rightMargin: 30
+            currentIndex: application.getLanguage()
             model: ["English", "Vietnamese"]
-            onCurrentIndexChanged: console.log(model[currentIndex])
-        }
+            onCurrentIndexChanged: {
+                if (settingDialog.visible) {
+                    changeLanguage.open()
+                }
+            }
 
+            Dialog {
+                id: changeLanguage
+                title: qsTr("Restart Required")
+                standardButtons: StandardButton.Yes | StandardButton.No
+
+                Row{
+                    spacing: 10
+
+                    Image {
+                        id: warningImg
+                        source: "img/warning.png"
+
+                        width: 50
+                        height: 50
+                    }
+
+                    Text {
+                        id: changeLanguageLabel
+
+                        font.pixelSize: 14
+                        text: qsTr("The language change will take effect after restart.")
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+
+
+                onYes: {
+                    application.changeLanguage(comboBox.currentIndex)
+                }
+            }
+        }
     }
 
     Connections {
         target: musicList
 
         onLoadComplete:{
-            text1.text = "Shuffle all (" + musicList.count() + ")"
+            text1.text = qsTr("Shuffle all (") + musicList.count() + ")"
         }
     }
 
@@ -318,7 +356,7 @@ Window {
                                 x: 0
                                 y: 0
                                 height: 50
-                                text: "My music"
+                                text: qsTr("My music")
                                 anchors.right: parent.right
                                 anchors.rightMargin: 0
                                 anchors.left: parent.left
@@ -332,7 +370,7 @@ Window {
                                 x: 0
                                 y: 100
                                 height: 50
-                                text: "Now playing"
+                                text: qsTr("Now playing")
                                 toggle: true
                                 anchors.right: parent.right
                                 anchors.rightMargin: 0
@@ -346,7 +384,7 @@ Window {
                                 x: 0
                                 y: 50
                                 height: 50
-                                text: "Recent plays"
+                                text: qsTr("Recent plays")
                                 toggle: true
                                 anchors.right: parent.right
                                 anchors.rightMargin: 0
@@ -372,7 +410,7 @@ Window {
 
                         IconButton {
                             id: iconButton3
-                            text: "Playlists"
+                            text: qsTr("Playlists")
                             source: "img/playlist.png"
                             anchors.right: parent.right
                             anchors.rightMargin: 0
@@ -404,7 +442,7 @@ Window {
                         IconButton {
                             id: iconButton4
                             height: 50
-                            text: "Setting"
+                            text: qsTr("Setting")
                             anchors.right: parent.right
                             anchors.rightMargin: 0
                             anchors.bottom: parent.bottom
@@ -490,7 +528,7 @@ Window {
 
                             ToggleButton{
                                 id: toggleButton
-                                text: "Songs"
+                                text: qsTr("Songs")
                                 x: 21
                                 y: 80
 
@@ -504,7 +542,7 @@ Window {
                                 x: 107
                                 y: 80
 
-                                text: "Artists"
+                                text: qsTr("Artists")
 
                                 onClicked: {
                                     stackLayout.currentIndex = 1;
@@ -516,7 +554,7 @@ Window {
                                 x: 193
                                 y: 80
 
-                                text: "Albums"
+                                text: qsTr("Albums")
 
                                 onClicked: {
                                     stackLayout.currentIndex = 2;
@@ -548,68 +586,68 @@ Window {
                             id: text1
                             x: 57
                             y: 136
-                            text: "Shuffle all (" + musicList.count() + ")"
+                            text: qsTr("Shuffle all (0)")
                             style: Text.Normal
                             font.weight: Font.Thin
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                         Text {
                             id: text2
-                            x: 169
+                            x: text1.x + text1.width + 30
                             y: 136
                             text: qsTr("Sort by:")
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                         Text {
                             id: text3
-                            x: 220
+                            x: text2.x + text2.width + 5
                             y: 136
                             color: "#085bad"
                             text: qsTr("Date added")
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                         Text {
                             id: text4
-                            x: 322
+                            x: text3.x + text3.width + 30
                             y: 136
                             text: qsTr("Filter:")
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                         Text {
                             id: text5
-                            x: 362
+                            x: text4.x + text4.width + 5
                             y: 136
                             color: "#085bad"
                             text: qsTr("All")
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                         Text {
                             id: text6
-                            x: 413
+                            x: text5.x + text5.width + 30
                             y: 136
                             text: qsTr("Genre:")
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                         Text {
                             id: text7
-                            x: 459
+                            x: text6.x + text6.width + 5
                             y: 136
                             color: "#085bad"
                             text: qsTr("All genres")
-                            font.family: "Adobe Kaiti Std R"
-                            font.pixelSize: 13
+                            font.family: "Times New Roman"
+                            font.pixelSize: 14
                         }
 
                     }
@@ -629,6 +667,7 @@ Window {
 
                             ListView {
                                 id: listView
+                                boundsBehavior: Flickable.DragAndOvershootBounds
                                 anchors.rightMargin: 20
                                 anchors.leftMargin: 20
                                 anchors.fill: parent
