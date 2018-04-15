@@ -39,24 +39,6 @@ QVariant MusicListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-bool MusicListModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    if (data(index, role) != value) {
-        // FIXME: Implement me!
-        emit dataChanged(index, index, QVector<int>() << role);
-        return true;
-    }
-    return false;
-}
-
-Qt::ItemFlags MusicListModel::flags(const QModelIndex &index) const
-{
-    if (!index.isValid())
-        return Qt::NoItemFlags;
-
-    return Qt::ItemIsEditable; // FIXME: Implement me!
-}
-
 QHash<int, QByteArray> MusicListModel::mRoleName = {
     {(int) URL_ROLE, "url"},
     {(int) TITLE_ROLE, "title"},

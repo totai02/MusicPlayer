@@ -660,25 +660,96 @@ Window {
 
                         Row {
                             id: row1
-                            width: parent.width
-                            height: parent.width
                             Layout.fillHeight: true
                             Layout.fillWidth: true
 
-                            GridView {
-                                id: gridView
-                                anchors.rightMargin: 20
-                                anchors.leftMargin: 0
-                                anchors.fill: parent
-                                highlightRangeMode: GridView.ApplyRange
+                            Flickable {
+
+
+                                id: flickable
                                 clip: true
-                                flickableDirection: Flickable.VerticalFlick
-                                delegate: ArtistItem{
+                                contentWidth: parent.width
+                                contentHeight: column3.childrenRect.height
+                                anchors.fill: parent
+
+                                Column {
+                                    id: column3
+                                    width: parent.width
+                                    height: repeater.childrenRect.height
+
+                                    Repeater{
+                                        id: repeater
+                                        width: parent.width
+                                        height: childrenRect.height
+                                        model: artistModel
+
+                                        ColumnLayout {
+
+                                            property var data1: model
+
+                                            width: parent.width
+                                            height: flow1.childrenRect.height + 50
+
+                                            Item{
+
+                                                id: item1
+                                                height: 50
+                                                width: parent.width
+
+                                                Item {
+
+                                                    width: 100
+                                                    height: 50
+
+                                                    Rectangle{
+                                                        width: 50
+                                                        height: 30
+                                                        color: "#6c5454"
+                                                        radius: 15
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+                                                        anchors.verticalCenter: parent.verticalCenter
+
+                                                    }
+
+                                                    Text {
+                                                        id: text14
+                                                        x: 26
+                                                        color: "#ffffff"
+                                                        text: data1.groupName
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        font.pixelSize: 20
+                                                    }
+
+                                                }
+                                            }
+
+
+                                            Flow {
+
+                                                id: flow1
+
+
+                                                height: repeater1.childrenRect.height
+                                                Layout.fillWidth: true
+
+                                                Repeater {
+
+                                                    id: repeater1
+                                                    model: data1.artistList
+
+                                                    height: childrenRect.height
+                                                    ArtistItem{
+                                                        artist: modelData
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                                cellHeight: 200
-                                cellWidth: 200
-                                model: 20
                             }
+
+
                         }
 
                         Row {
@@ -692,11 +763,12 @@ Window {
                                 anchors.leftMargin: 20
                                 clip: true
                                 anchors.fill: parent
-                                model: 20
+                                model: albumModel
                                 cellWidth: 200
                                 cellHeight: 200
                                 delegate: AlbumItem{
-
+                                    albumName: model.album
+                                    artistName: model.artist
                                 }
                             }
                         }

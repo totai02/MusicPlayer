@@ -24,7 +24,12 @@ SOURCES += main.cpp \
     folderitem.cpp \
     application.cpp \
     mediatool.cpp \
-    artist.cpp
+    artistmodel.cpp \
+    artistitem.cpp \
+    artistlist.cpp \
+    albummodel.cpp \
+    albumlist.cpp \
+    albumitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -49,6 +54,11 @@ HEADERS += \
     folderitem.h \
     application.h \
     mediatool.h \
-    artist.h
+    artistmodel.h \
+    artistitem.h \
+    artistlist.h \
+    albummodel.h \
+    albumlist.h \
+    albumitem.h
 
 RC_ICONS = img/icon.ico

@@ -3,6 +3,10 @@ import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 InteractiveArea {
+
+    property alias albumName: albumLabel.text
+    property alias artistName: artistNameLabel.text
+
     id: albumItem
     width: 150
     height: 200

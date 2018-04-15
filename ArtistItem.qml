@@ -3,6 +3,9 @@ import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 InteractiveArea {
+
+    property alias artist: text1.text
+
     id: item1
     width: 200
     height: 200
@@ -115,12 +118,21 @@ InteractiveArea {
     Text {
         id: text1
         text: qsTr("Various Aritists")
+        elide: Text.ElideNone
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        anchors.top: parent.top
+        anchors.topMargin: 150
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
         font.bold: false
-        font.family: "Adobe Heiti Std R"
+        font.family: "Tahoma"
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 15
-        anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 18
+        anchors.bottomMargin: 0
+        font.pixelSize: 16
     }
 
 }
