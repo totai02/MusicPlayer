@@ -58,6 +58,8 @@ signals:
 
     void showLoading();
 
+    void emptyToShow();
+
 public slots:
 
     void receiveDataFromMediaTool(const QJsonArray &result);

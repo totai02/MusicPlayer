@@ -32,8 +32,10 @@ void MusicList::receiveMusicList(const QVector<FolderItem> &list)
 
     waitingMediaTool = list.size();
 
-    if (waitingMediaTool == 0) emit loadComplete();
-
+    if (waitingMediaTool == 0) {
+        emit loadComplete();
+        emit emptyToShow();
+    }
     for(int i = 0; i < list.size(); i++){
         string folder = list.at(i).getUrl().toStdString();
         emit getDataFromMediaTool(QString::fromStdString(folder));

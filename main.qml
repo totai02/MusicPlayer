@@ -268,7 +268,12 @@ Window {
         target: musicList
 
         onLoadComplete:{
+            stackLayout.currentIndex = 0
             text1.text = qsTr("Shuffle all (") + musicList.count() + ")"
+        }
+
+        onEmptyToShow: {
+            stackLayout.currentIndex = 3
         }
     }
 
@@ -533,7 +538,8 @@ Window {
                                 y: 80
 
                                 onClicked: {
-                                    stackLayout.currentIndex = 0;
+
+                                    if (stackLayout.currentIndex != 3) stackLayout.currentIndex = 0;
                                 }
                             }
 
@@ -545,7 +551,7 @@ Window {
                                 text: qsTr("Artists")
 
                                 onClicked: {
-                                    stackLayout.currentIndex = 1;
+                                    if (stackLayout.currentIndex != 3) stackLayout.currentIndex = 1;
                                 }
                             }
 
@@ -557,7 +563,7 @@ Window {
                                 text: qsTr("Albums")
 
                                 onClicked: {
-                                    stackLayout.currentIndex = 2;
+                                    if (stackLayout.currentIndex != 3) stackLayout.currentIndex = 2;
                                 }
                             }
                         }
@@ -656,7 +662,6 @@ Window {
                         id: stackLayout
                         width: 100
                         height: 100
-                        currentIndex: 0
                         Layout.fillHeight: true
                         Layout.fillWidth: true
 
@@ -808,6 +813,40 @@ Window {
                                 delegate: AlbumItem{
                                     albumName: model.album
                                     artistName: model.artist
+                                }
+                            }
+                        }
+
+                        Column {
+                            id: row4
+                            width: 200
+                            height: 400
+                            spacing: 10
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+
+                            Text {
+                                id: text15
+                                text: qsTr("Nothing to show here.")
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.pixelSize: 20
+                            }
+
+                            Text {
+                                id: text16
+                                color: "#1163c9"
+                                text: qsTr("Add music")
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.pixelSize: 16
+
+                                MouseArea {
+                                    id: mouseArea1
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+
+                                    onClicked: {
+                                        folderManager.open()
+                                    }
                                 }
                             }
                         }
