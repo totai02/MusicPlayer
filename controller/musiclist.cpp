@@ -1,15 +1,11 @@
 #include "musiclist.h"
+#include <QDebug>
 
 using namespace std;
 
 MusicList::MusicList(QObject *parent) : QObject(parent)
 {
 
-}
-
-void MusicList::loadMusicInFolders()
-{
-    emit getMusicList();
 }
 
 int MusicList::count()
@@ -30,6 +26,7 @@ void MusicList::receiveMusicList(const QVector<FolderItem> &list)
     removeAll();
     emit setMusicList(mList);
 
+
     waitingMediaTool = list.size();
 
     if (waitingMediaTool == 0) {
@@ -45,35 +42,6 @@ void MusicList::receiveMusicList(const QVector<FolderItem> &list)
 void MusicList::getMusicInfo(int index)
 {
     emit sendMusicInfo(mList.at(index));
-}
-
-QJsonArray MusicList::getMediaArray(QString folderName)
-{
-    QProcess *mediaInfo = new QProcess(this);
-    mediaInfo->start("MediaInfo/mediainfo", QStringList() << "--Output=JSON" << folderName.append("/*.mp3"));
-    mediaInfo->waitForReadyRead();
-
-    QByteArray jsonData("[");
-    QString currentObject;
-    while (!mediaInfo->atEnd()){
-        QString line = mediaInfo->readLine();
-        if (line.compare("}{\r\n") == 0){
-            currentObject.append("}");
-            jsonData.append(currentObject);
-            jsonData.append(",");
-            currentObject = "{";
-        } else {
-            currentObject.append(line);
-        }
-
-    }
-
-    jsonData.append(currentObject);
-    jsonData.append("]");
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
-    QJsonArray arrayObject = jsonDoc.array();
-
-    return arrayObject;
 }
 
 QVector<MusicItem> MusicList::items() const

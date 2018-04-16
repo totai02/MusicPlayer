@@ -34,7 +34,7 @@ signals:
     void postRemoveItem();
 
 public slots:
-    void getFolderList();
+
 
 private:
     QVector<FolderItem> mList;

@@ -1,13 +1,9 @@
 #include "musicfolderlist.h"
+#include <QDebug>
 
 MusicFolderList::MusicFolderList(QObject *parent) : QObject(parent)
 {
 
-}
-
-void MusicFolderList::getFolderList()
-{
-    emit sendFolderList(mList);
 }
 
 QVector<FolderItem> MusicFolderList::items() const
@@ -35,9 +31,8 @@ void MusicFolderList::append(QString url, bool addFile)
 
     if (addFile){
         writeDataToFile();
+        emit sendFolderList(mList);
     }
-
-    emit sendFolderList(mList);
 }
 
 void MusicFolderList::removeRow(int index)
@@ -72,6 +67,9 @@ void MusicFolderList::readDataFromFile()
        QString line = in.readLine();
        append(line, false);
     }
+
+    emit sendFolderList(mList);
+
     file.close();
 }
 

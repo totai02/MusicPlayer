@@ -30,8 +30,6 @@ public:
         thread.wait();
     }
 
-    Q_INVOKABLE void loadMusicInFolders();
-
     Q_INVOKABLE int count();
 
     Q_INVOKABLE void removeAll();
@@ -43,7 +41,6 @@ public:
     void getFullDataFromTool();
 
 signals:
-    void getMusicList();
     void setMusicList(const QVector<MusicItem> &list);
 
     void preAppendItem();
@@ -72,7 +69,6 @@ private:
 
     QVector<MusicItem> mList;
 
-    QJsonArray getMediaArray(QString folderName);
     QJsonObject getMediaInfo(const QJsonObject &obj);
 
     QThread thread;

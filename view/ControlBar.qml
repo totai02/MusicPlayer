@@ -3,9 +3,13 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 Item {
-    height: 100
+
+    property alias mediaPos: progressBar
     property alias customButton2: customButton2
+
     width: 1024
+    height: 100
+
     Rectangle {
         id: rectangle
         color: "#1473a2"
@@ -25,10 +29,8 @@ Item {
 
             if (isPlay) {
                 customButton2.imageSource = "img/pause.png"
-                progressBar.enabled = true;
             } else {
                 customButton2.imageSource = "img/play-circle.png"
-                progressBar.enabled = false;
             }
         }
 

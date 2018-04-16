@@ -35,7 +35,11 @@ SOURCES += main.cpp \
     model/artistmodel.cpp \
     model/musicfoldermodel.cpp \
     model/musiclistmodel.cpp \
-    tool/mediatool.cpp
+    tool/mediatool.cpp \
+    controller/modellistcontroller.cpp \
+    entity/item.cpp \
+    tool/artistinfo.cpp \
+    tool/albuminfo.cpp
 
 RESOURCES += qml.qrc
 
@@ -70,4 +74,10 @@ HEADERS += \
     model/artistmodel.h \
     model/musicfoldermodel.h \
     model/musiclistmodel.h \
-    tool/mediatool.h
+    tool/mediatool.h \
+    controller/modellistcontroller.h \
+    entity/item.h \
+    tool/artistinfo.h \
+    tool/albuminfo.h \
+    defines/defines.h \
+    define/defines.h

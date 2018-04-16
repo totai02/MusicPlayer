@@ -27,6 +27,11 @@ void Application::setApplication(QGuiApplication *app)
     loadLanguage();
 }
 
+bool Application::isLoading() const
+{
+    return loading;
+}
+
 int Application::getLanguage() const
 {
     return language;
@@ -63,11 +68,13 @@ void Application::loadLanguage()
 
 void Application::onShowLoading()
 {
+    loading = true;
     showLoading();
 }
 
 void Application::onHideLoading()
 {
+    loading = false;
     hideLoading();
 }
 

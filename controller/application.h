@@ -29,9 +29,12 @@ public:
 
     Q_INVOKABLE int getLanguage() const;
 
+    Q_INVOKABLE bool isLoading() const;
+
     void setEngine(QQmlApplicationEngine *value);
 
     void setApplication(QGuiApplication *app);
+
 
 
 private:
@@ -43,6 +46,8 @@ private:
     QTranslator tranlator;
 
     void loadLanguage();
+
+    bool loading = false;
 
 signals:
 

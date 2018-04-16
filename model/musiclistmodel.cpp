@@ -45,7 +45,7 @@ QHash<int, QByteArray> MusicListModel::mRoleName = {
     {(int) ARTIST_ROLE, "artist"},
     {(int) ALBUM_ROLE, "album"},
     {(int) GENRE_ROLE, "genre"},
-    {(int) LENGTH_ROLE, "length"},
+    {(int) LENGTH_ROLE, "length"}
 };
 
 QHash<int, QByteArray> MusicListModel::roleNames() const

@@ -1,4 +1,5 @@
 #include "artistlist.h"
+#include <QDebug>
 
 ArtistList::ArtistList(QObject *parent) : QObject(parent)
 {
@@ -10,43 +11,31 @@ QVector<ArtistItem> ArtistList::items() const
     return mList;
 }
 
+void ArtistList::setTool(ArtistInfo *tool)
+{
+    tool->moveToThread(&thread);
+    connect(this, SIGNAL(updateArtists(MusicItemVector)), tool, SLOT(onUpdateArtists(MusicItemVector)), Qt::QueuedConnection);
+    connect(tool, SIGNAL(readyResult(HashCharString)), this, SLOT(onReceiveArtists(HashCharString)), Qt::QueuedConnection);
+    thread.start();
+}
+
 void ArtistList::onReceiveMediaList(const QVector<MusicItem> &list)
 {
     emit preItemClear();
     mList.clear();
     emit postItemClear();
 
-    QVector<QString> artistList;
-    for (int i = 0; i < list.size(); ++i) {
-        if (!artistList.contains(list.at(i).getArtist())){
-            artistList.append(list.at(i).getArtist());
-        }
-    }
+    emit updateArtists((MusicItemVector) list);
+}
 
-    QHash<QChar, QList<QString>> result;
-
-    for (int i = 0; i < artistList.size(); ++i) {
-        QChar character = artistList.at(i).simplified().at(0);
-        if (!result.contains(character)){
-            QList<QString> artists;
-            artists.append(artistList.at(i));
-            result.insert(character, artists);
-        } else {
-            QList<QString> artists = result.value(character);
-            artists.append(artistList.at(i));
-            result.insert(character, artists);
-        }
-    }
-
-    QList<QChar> keys = result.keys();
-    QList<QList<QString>> values = result.values();
-
-    for (int i = 0; i < result.size(); ++i) {
+void ArtistList::onReceiveArtists(const HashCharString &hash)
+{
+    for (int i = 0; i < hash.size(); ++i) {
         emit preItemAppended();
 
         ArtistItem item;
-        item.setGroupName(keys.at(i));
-        item.setArtistList(values.at(i));
+        item.setGroupName(hash.keys().at(i));
+        item.setArtistList(hash.values().at(i));
         mList.append(item);
 
         emit postItemAppended();

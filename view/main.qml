@@ -26,6 +26,20 @@ Window {
         }
     }
 
+    Connections {
+        target: musicList
+
+        onLoadComplete:{
+            musicControl.mediaPos.enabled = true
+            stackLayout.currentIndex = 0
+            text1.text = qsTr("Shuffle all (") + musicList.count() + ")"
+        }
+
+        onEmptyToShow: {
+            stackLayout.currentIndex = 3
+        }
+    }
+
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose a folder")
@@ -48,7 +62,7 @@ Window {
         anchors.right: parent.right
         anchors.rightMargin: 20
 
-        state: "hide"
+        state: if (application.isLoading()) return "show"; else return "hide";
 
         states: [
             State {
@@ -261,19 +275,6 @@ Window {
                     application.changeLanguage(comboBox.currentIndex)
                 }
             }
-        }
-    }
-
-    Connections {
-        target: musicList
-
-        onLoadComplete:{
-            stackLayout.currentIndex = 0
-            text1.text = qsTr("Shuffle all (") + musicList.count() + ")"
-        }
-
-        onEmptyToShow: {
-            stackLayout.currentIndex = 3
         }
     }
 
@@ -695,10 +696,13 @@ Window {
                                     }
                                 }
 
-                            }
+                                ScrollBar.vertical: ScrollBar {
+                                    parent: listView.parent
+                                    anchors.top: listView.top
+                                    anchors.left: listView.right
+                                    anchors.bottom: listView.bottom
+                                }
 
-                            Component.onCompleted: {
-                                musicList.loadMusicInFolders();
                             }
                         }
 
@@ -716,6 +720,8 @@ Window {
                                 contentHeight: column3.childrenRect.height
                                 anchors.fill: parent
 
+                                ScrollBar.vertical: ScrollBar { }
+
                                 Column {
                                     id: column3
                                     width: parent.width
@@ -726,6 +732,7 @@ Window {
                                         width: parent.width
                                         height: childrenRect.height
                                         model: artistModel
+
 
                                         ColumnLayout {
 
@@ -813,6 +820,13 @@ Window {
                                 delegate: AlbumItem{
                                     albumName: model.album
                                     artistName: model.artist
+                                }
+
+                                ScrollBar.vertical: ScrollBar {
+                                    parent: gridView1.parent
+                                    anchors.top: gridView1.top
+                                    anchors.left: gridView1.right
+                                    anchors.bottom: gridView1.bottom
                                 }
                             }
                         }

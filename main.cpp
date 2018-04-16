@@ -1,7 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QVector>
 #include <QDebug>
+
+#include "define/defines.h"
 
 #include "controller/application.h"
 #include "controller/musicplayer.h"
@@ -16,6 +19,7 @@
 #include "model/albummodel.h"
 
 #include "tool/mediatool.h"
+#include "tool/artistinfo.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,33 +29,42 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    //model
+    //register
+    qRegisterMetaType<MusicItemVector>("MusicItemVector");
+    qRegisterMetaType<HashCharString>("HashCharString");
+
+
+    //models
     MusicListModel musicModel;
     MusicFolderModel folderModel;
     ArtistModel artistModel;
     AlbumModel albumModel;
 
-    //controller
+    //controllers
     Application application;
     MusicFolderList folderList;
     MusicList musicList;
     ArtistList artistList;
     AlbumList albumList;
+
+    //tools
     MediaTool mediaTool;
+    ArtistInfo artistTool;
 
     application.setApplication(&app);
     application.setEngine(&engine);
-    musicList.setMediaTool(&mediaTool);
     musicModel.setList(&musicList);
     folderModel.setList(&folderList);
     artistModel.setList(&artistList);
     albumModel.setList(&albumList);
 
+    musicList.setMediaTool(&mediaTool);
+    artistList.setTool(&artistTool);
+
     MusicPlayer player;
 
     //connection
     QObject::connect(&folderList, SIGNAL(sendFolderList(QVector<FolderItem>)), &musicList, SLOT(receiveMusicList(QVector<FolderItem>)));
-    QObject::connect(&musicList, SIGNAL(getMusicList()), &folderList, SLOT(getFolderList()));
     QObject::connect(&musicList, SIGNAL(setMusicList(QVector<MusicItem>)), &player, SLOT(receivePlayList(QVector<MusicItem>)));
     QObject::connect(&player, SIGNAL(musicInfoSignal(int)), &musicList, SLOT(getMusicInfo(int)));
     QObject::connect(&musicList, SIGNAL(sendMusicInfo(MusicItem)), &player, SLOT(receiveMediaInfo(MusicItem)));
