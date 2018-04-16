@@ -46,13 +46,13 @@ void Application::loadLanguage()
     int lang = in.readLine().toInt();
 
     if (lang == VIETNAMESE){
-        tranlator.load(":/language_vn.qm");
+        tranlator.load(":/language/language_vn.qm");
         language = lang;
     } else if (lang == FRANCE){
-        tranlator.load(":/language_fr.qm");
+        tranlator.load(":/language/language_fr.qm");
         language = lang;
     } else {
-        tranlator.load(":/language_en.qm");
+        tranlator.load(":/language/language_en.qm");
         language = 0;
     }
 

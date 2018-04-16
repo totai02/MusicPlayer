@@ -50,7 +50,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RC_ICONS = img/icon.ico
+RC_ICONS = view/img/icon.ico
 
 TRANSLATIONS = language\language_en.ts \
                language\language_vn.ts

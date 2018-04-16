@@ -38,5 +38,8 @@
         <file>view/img/volumn.png</file>
         <file>view/img/warning.png</file>
         <file>view/img/x_icon.png</file>
+        <file>language/language_en.qm</file>
+        <file>language/language_fr.qm</file>
+        <file>language/language_vn.qm</file>
     </qresource>
 </RCC>
