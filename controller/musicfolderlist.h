@@ -6,7 +6,7 @@
 #include <QFile>
 #include <QTextStream>
 
-#include "folderitem.h"
+#include "entity/folderitem.h"
 
 class MusicFolderList : public QObject
 {

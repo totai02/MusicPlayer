@@ -14,9 +14,9 @@
 #include <QJsonArray>
 #include <QThread>
 
-#include "musicitem.h"
-#include "folderitem.h"
-#include "mediatool.h"
+#include "entity/musicitem.h"
+#include "entity/folderitem.h"
+#include "tool/mediatool.h"
 
 
 class MusicList : public QObject

@@ -4,8 +4,7 @@
 #include <QAbstractListModel>
 #include <QVector>
 
-#include "musicfolderlist.h"
-#include "folderitem.h"
+#include "controller/musicfolderlist.h"
 
 class MusicFolderModel : public QAbstractListModel
 {

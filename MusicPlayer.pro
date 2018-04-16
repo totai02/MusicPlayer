@@ -15,21 +15,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    musicitem.cpp \
-    musiclistmodel.cpp \
-    musicfoldermodel.cpp \
-    musiclist.cpp \
-    musicplayer.cpp \
-    musicfolderlist.cpp \
-    folderitem.cpp \
-    application.cpp \
-    mediatool.cpp \
-    artistmodel.cpp \
-    artistitem.cpp \
-    artistlist.cpp \
-    albummodel.cpp \
-    albumlist.cpp \
-    albumitem.cpp
+    controller/albumlist.cpp \
+    controller/application.cpp \
+    controller/artistlist.cpp \
+    controller/musicfolderlist.cpp \
+    controller/musiclist.cpp \
+    controller/musicplayer.cpp \
+    controller/albumlist.cpp \
+    controller/application.cpp \
+    controller/artistlist.cpp \
+    controller/musicfolderlist.cpp \
+    controller/musiclist.cpp \
+    controller/musicplayer.cpp \
+    entity/albumitem.cpp \
+    entity/artistitem.cpp \
+    entity/folderitem.cpp \
+    entity/musicitem.cpp \
+    model/albummodel.cpp \
+    model/artistmodel.cpp \
+    model/musicfoldermodel.cpp \
+    model/musiclistmodel.cpp \
+    tool/mediatool.cpp
 
 RESOURCES += qml.qrc
 
@@ -44,24 +50,24 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    musicitem.h \
-    musiclistmodel.h \
-    musicfoldermodel.h \
-    musiclist.h \
-    musicplayer.h \
-    musicfolderlist.h \
-    folderitem.h \
-    application.h \
-    mediatool.h \
-    artistmodel.h \
-    artistitem.h \
-    artistlist.h \
-    albummodel.h \
-    albumlist.h \
-    albumitem.h
-
 RC_ICONS = img/icon.ico
 
-TRANSLATIONS = language_en.ts \
-               language_vn.ts
+TRANSLATIONS = language\language_en.ts \
+               language\language_vn.ts
+
+HEADERS += \
+    controller/albumlist.h \
+    controller/application.h \
+    controller/artistlist.h \
+    controller/musicfolderlist.h \
+    controller/musiclist.h \
+    controller/musicplayer.h \
+    entity/albumitem.h \
+    entity/artistitem.h \
+    entity/folderitem.h \
+    entity/musicitem.h \
+    model/albummodel.h \
+    model/artistmodel.h \
+    model/musicfoldermodel.h \
+    model/musiclistmodel.h \
+    tool/mediatool.h

@@ -5,7 +5,7 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 
-#include "musicitem.h"
+#include "entity/musicitem.h"
 
 class MusicPlayer : public QObject
 {

@@ -3,17 +3,19 @@
 #include <QQmlContext>
 #include <QDebug>
 
-#include "application.h"
-#include "musiclistmodel.h"
-#include "musicfolderlist.h"
-#include "musiclist.h"
-#include "musicplayer.h"
-#include "musicfoldermodel.h"
-#include "mediatool.h"
-#include "artistlist.h"
-#include "artistmodel.h"
-#include "albumlist.h"
-#include "albummodel.h"
+#include "controller/application.h"
+#include "controller/musicplayer.h"
+#include "controller/musiclist.h"
+#include "controller/artistlist.h"
+#include "controller/albumlist.h"
+#include "controller/musicfolderlist.h"
+
+#include "model/musiclistmodel.h"
+#include "model/musicfoldermodel.h"
+#include "model/artistmodel.h"
+#include "model/albummodel.h"
+
+#include "tool/mediatool.h"
 
 int main(int argc, char *argv[])
 {
@@ -69,7 +71,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("musicList", &musicList);
     engine.rootContext()->setContextProperty("folderList", &folderList);
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/view/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 

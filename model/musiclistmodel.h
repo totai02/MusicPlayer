@@ -4,8 +4,7 @@
 #include <QAbstractListModel>
 #include <QVector>
 
-#include "musicitem.h"
-#include "musiclist.h"
+#include "controller/musiclist.h"
 
 class MusicList;
 

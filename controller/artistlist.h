@@ -5,8 +5,8 @@
 #include <QVector>
 #include <QHash>
 
-#include "artistitem.h"
-#include "musicitem.h"
+#include "entity/artistitem.h"
+#include "entity/musicitem.h"
 
 class ArtistList : public QObject
 {

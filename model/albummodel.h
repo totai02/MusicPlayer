@@ -1,19 +1,19 @@
-#ifndef ARTISTMODEL_H
-#define ARTISTMODEL_H
+#ifndef ALBUMMODEL_H
+#define ALBUMMODEL_H
 
 #include <QAbstractListModel>
-#include "artistlist.h"
+#include "controller/albumlist.h"
 
-class ArtistModel : public QAbstractListModel
+class AlbumModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit ArtistModel(QObject *parent = nullptr);
+    explicit AlbumModel(QObject *parent = nullptr);
 
     enum {
-        GROUPNAME_ROLE = Qt::UserRole,
-        ARTISTLIST_ROLE
+        ALBUM_ROLE = Qt::UserRole,
+        ARTIST_ROLE
     };
 
     // Basic functionality:
@@ -23,14 +23,16 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-    ArtistList *list() const;
-    void setList(ArtistList *list);
+
+    AlbumList *list() const;
+    void setList(AlbumList *list);
 
 private:
 
     static QHash<int, QByteArray> mRoleName;
 
-    ArtistList *mList;
+    AlbumList *mList;
+
 };
 
-#endif // ARTISTMODEL_H
+#endif // ALBUMMODEL_H
