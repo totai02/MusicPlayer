@@ -18,7 +18,7 @@ InteractiveArea {
             when: pressed
             PropertyChanges {
                 target: content
-                scale: 0.8
+                scale: 0.9
             }
         },
         State {

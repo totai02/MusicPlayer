@@ -39,5 +39,6 @@
         <file>language_en.qm</file>
         <file>language_vn.qm</file>
         <file>img/warning.png</file>
+        <file>language_fr.qm</file>
     </qresource>
 </RCC>

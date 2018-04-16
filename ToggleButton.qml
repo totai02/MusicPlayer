@@ -64,8 +64,11 @@ InteractiveArea {
 
     onReleased: {
         state = "release"
-        checked = true
-        parent.change(this)
+        if (!checked){
+            checked = true
+            parent.change(this)
+        }
+
     }
 
     onEntered: {

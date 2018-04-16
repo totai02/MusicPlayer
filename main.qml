@@ -224,7 +224,7 @@ Window {
             anchors.right: parent.right
             anchors.rightMargin: 30
             currentIndex: application.getLanguage()
-            model: ["English", "Vietnamese"]
+            model: ["English", "France","Vietnamese"]
             onCurrentIndexChanged: {
                 if (settingDialog.visible) {
                     changeLanguage.open()

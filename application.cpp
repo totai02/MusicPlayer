@@ -48,6 +48,9 @@ void Application::loadLanguage()
     if (lang == VIETNAMESE){
         tranlator.load(":/language_vn.qm");
         language = lang;
+    } else if (lang == FRANCE){
+        tranlator.load(":/language_fr.qm");
+        language = lang;
     } else {
         tranlator.load(":/language_en.qm");
         language = 0;
