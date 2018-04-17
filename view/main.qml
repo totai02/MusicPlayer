@@ -30,7 +30,8 @@ Window {
         target: musicList
 
         onLoadComplete:{
-            musicControl.mediaPos.enabled = true
+            if (value) musicControl.enableButton(true)
+            else musicControl.enableButton(false)
             stackLayout.currentIndex = 0
             text1.text = qsTr("Shuffle all (") + musicList.count() + ")"
         }
@@ -880,6 +881,10 @@ Window {
             ControlBar {
                 id: musicControl
                 Layout.fillWidth: true
+
+                Component.onCompleted: {
+                    musicControl.enableButton(false)
+                }
             }
 
         }

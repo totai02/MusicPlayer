@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Shuffle all (</source>
-        <translation>Xáo trộn tất cả (</translation>
+        <translation>Phát ngẫu nhiên(</translation>
     </message>
     <message>
         <source>My music</source>
@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Recent plays</source>
-        <translation>Vừa khởi chạy</translation>
+        <translation>Phát gần đây</translation>
     </message>
     <message>
         <source>Playlists</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Shuffle all (0)</source>
-        <translation>Xáo trộn tất cả (0)</translation>
+        <translation>Phát ngẫu nhiên(0)</translation>
     </message>
     <message>
         <source>Sort by:</source>

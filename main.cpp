@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     QObject::connect(&musicList, SIGNAL(setMusicList(QVector<MusicItem>)), &player, SLOT(receivePlayList(QVector<MusicItem>)));
     QObject::connect(&player, SIGNAL(musicInfoSignal(int)), &musicList, SLOT(getMusicInfo(int)));
     QObject::connect(&musicList, SIGNAL(sendMusicInfo(MusicItem)), &player, SLOT(receiveMediaInfo(MusicItem)));
-    QObject::connect(&musicList, SIGNAL(loadComplete()), &application, SLOT(onHideLoading()));
+    QObject::connect(&musicList, SIGNAL(loadComplete(int)), &application, SLOT(onHideLoading()));
     QObject::connect(&musicList, SIGNAL(setMusicList(QVector<MusicItem>)), &application, SLOT(onShowLoading()));
     QObject::connect(&musicList, SIGNAL(setMusicList(QVector<MusicItem>)), &artistList, SLOT(onReceiveMediaList(QVector<MusicItem>)));
     QObject::connect(&musicList, SIGNAL(setMusicList(QVector<MusicItem>)), &albumList, SLOT(onReceiveMediaList(QVector<MusicItem>)));

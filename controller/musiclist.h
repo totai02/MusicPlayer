@@ -48,7 +48,7 @@ signals:
     void preRemoveAllItem();
     void postRemoveAllItem();
 
-    void loadComplete();
+    void loadComplete(int value = 0);
     void sendMusicInfo(const MusicItem &item);
 
     void getDataFromMediaTool(const QString &);

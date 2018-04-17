@@ -69,7 +69,7 @@ void MusicList::setMediaTool(MediaTool *tool)
 void MusicList::getFullDataFromTool()
 {
     emit setMusicList(mList);
-    emit loadComplete();
+    emit loadComplete(mList.size());
 }
 
 void MusicList::receiveDataFromMediaTool(const QJsonArray &arrayInfo)

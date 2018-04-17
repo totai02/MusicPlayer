@@ -4,7 +4,13 @@ import QtQuick.Layouts 1.3
 
 Item {
 
-    property alias mediaPos: progressBar
+    function enableButton(value){
+        progressBar.enabled = value
+        customButton1.enabled = value
+        customButton2.enabled = value
+        customButton3.enabled = value
+    }
+
     property alias customButton2: customButton2
 
     width: 1024
@@ -155,6 +161,7 @@ Item {
                             id: customButton
                             width: 40
                             height: 40
+                            enabled: true
                             toggle: true
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                             imageSource: "img/shuffle_white.png"
@@ -168,6 +175,7 @@ Item {
                             id: customButton1
                             width: 40
                             height: 40
+                            enabled: false
                             imageSource: "img/skip-prev.png"
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
@@ -181,6 +189,7 @@ Item {
                             id: customButton2
                             width: 48
                             height: 48
+                            enabled: false
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                             imageSource: "img/play-circle.png"
 
@@ -201,6 +210,7 @@ Item {
                             id: customButton3
                             width: 40
                             height: 40
+                            enabled: false
                             imageSource: "img/skip-next.png"
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
@@ -213,6 +223,7 @@ Item {
                             id: customButton4
                             width: 40
                             height: 40
+                            enabled: true
                             toggle: true
                             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                             imageSource: "img/replay.png"
