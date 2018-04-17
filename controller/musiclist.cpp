@@ -26,7 +26,6 @@ void MusicList::receiveMusicList(const QVector<FolderItem> &list)
     removeAll();
     emit setMusicList(mList);
 
-
     waitingMediaTool = list.size();
 
     if (waitingMediaTool == 0) {

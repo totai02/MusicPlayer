@@ -43,7 +43,7 @@ private:
 
     QQmlApplicationEngine *engine;
     QGuiApplication *app;
-    QTranslator tranlator;
+    QTranslator *tranlator;
 
     void loadLanguage();
 

@@ -24,6 +24,10 @@ Window {
             if (value) loading.state = "show"
             else loading.state = "hide"
         }
+
+        onLanguageChange: {
+            comboBox.currentIndex = value
+        }
     }
 
     Connections {
@@ -248,8 +252,7 @@ Window {
 
             Dialog {
                 id: changeLanguage
-                title: qsTr("Restart Required")
-                standardButtons: StandardButton.Yes | StandardButton.No
+                title: qsTr("Change Language")
 
                 Row{
                     spacing: 10
@@ -266,14 +269,18 @@ Window {
                         id: changeLanguageLabel
 
                         font.pixelSize: 14
-                        text: qsTr("The language change will take effect after restart.")
+                        text: qsTr("Do you want to change language ?")
                         anchors.verticalCenter: parent.verticalCenter
                     }
                 }
 
-
-                onYes: {
+                onAccepted: {
                     application.changeLanguage(comboBox.currentIndex)
+                }
+
+                onRejected: {
+                    console.log("sd")
+                    comboBox.currentIndex = application.getLanguage()
                 }
             }
         }
@@ -664,6 +671,7 @@ Window {
                         id: stackLayout
                         width: 100
                         height: 100
+                        currentIndex: 3
                         Layout.fillHeight: true
                         Layout.fillWidth: true
 

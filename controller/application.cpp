@@ -50,19 +50,24 @@ void Application::loadLanguage()
 
     int lang = in.readLine().toInt();
 
+    tranlator = new QTranslator();
+
     if (lang == VIETNAMESE){
-        tranlator.load(":/language/language_vn.qm");
+
+        tranlator->load(":/language/language_vn.qm");
         language = lang;
     } else if (lang == FRANCE){
-        tranlator.load(":/language/language_fr.qm");
+
+        tranlator->load(":/language/language_fr.qm");
         language = lang;
     } else {
-        tranlator.load(":/language/language_en.qm");
+
+        tranlator->load(":/language/language_en.qm");
         language = 0;
     }
 
     if (app){
-        app->installTranslator(&tranlator);
+        app->installTranslator(tranlator);
     }
 }
 
@@ -92,6 +97,28 @@ void Application::changeLanguage(const int &lang)
 
     file.close();
 
-    app->quit();
-    QProcess::startDetached(app->arguments()[0], app->arguments());
+    app->removeTranslator(tranlator);
+
+    QTranslator newTran;
+
+    if (lang == VIETNAMESE){
+
+        newTran.load(":/language/language_vn.qm");
+        language = lang;
+    } else if (lang == FRANCE){
+
+        newTran.load(":/language/language_fr.qm");
+        language = lang;
+    } else {
+
+        newTran.load(":/language/language_en.qm");
+        language = 0;
+    }
+
+    tranlator = &newTran;
+
+    app->installTranslator(&newTran);
+    engine->retranslate();
+
+    emit languageChange(language);
 }
