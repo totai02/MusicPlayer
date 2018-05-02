@@ -2,7 +2,7 @@
 
 MusicPlayer::MusicPlayer(QObject *parent) : QObject(parent)
 {
-
+    player.setPlaylist(&playList);
 }
 
 void MusicPlayer::play(int index)
@@ -122,7 +122,6 @@ void MusicPlayer::receivePlayList(const QVector<MusicItem> &list)
     }
     playList.setCurrentIndex(0);
     playList.setPlaybackMode(QMediaPlaylist::Loop);
-    player.setPlaylist(&playList);
     connect(&player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(updateCurrentMediaInfo(QMediaPlayer::MediaStatus)));
     connect(&player, &QMediaPlayer::positionChanged, this, [=](qint64 p){
         duration = p / 1000;
